@@ -4,8 +4,6 @@
 int main(void) {
 
 	DIR *dir;
-
-	// Directory entry
 	struct dirent *ent;
 
 	// Open the current working directory
