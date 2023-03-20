@@ -4,22 +4,24 @@
 int main(void) {
 
 	DIR *dir;
+
+	/* Directory entry */
 	struct dirent *ent;
 
-	// Open the current working directory
+	/* Open the current working directory */
 	if((dir = opendir(".")) != NULL)
 	{
-		// Loop through all the entries in the directory
+		/* Loop through all the entries in the directory */
 		while ((ent = readdir(dir)) != NULL)
 		{
 			printf("%s\n", ent->d_name);
 		}
-		// Close the directory
+		/* Close the directory */
 		closedir(dir);
 	}
 	else
 	{
-		// Print an error message in case of fail
+		/* Print an error message in case of fail */
 		perror("");
 		return 1;
 	}
