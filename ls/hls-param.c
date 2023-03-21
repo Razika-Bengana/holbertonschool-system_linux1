@@ -20,6 +20,13 @@ int print_directory(char *path)
 	dir = opendir(path);
 	if (dir == NULL)
 	{
+		/* Check if it's a file */
+		if (errno == ENOTDIR)
+		{
+			printf("%s\n", path);
+			return (EXIT_SUCCESS);
+		}
+
 		/* Error occurred opening the file or directory */
 		fprintf(stderr, "%s: cannot access '%s': %s\n",
 			__func__, path, strerror(ENOENT));
@@ -62,22 +69,26 @@ int list_files(int argc, char *argv[])
 	{
 		getcwd(cwd, sizeof(cwd));
 		dir_path = cwd;
+		print_directory(dir_path);
 	}
+
 	else
 	{
+		int i;
+
+		for (i = 1; i < argc; i++)
+		{
 /* Construct the full path based on the directory name provided */
 		getcwd(cwd, sizeof(cwd));
 		dir_path = malloc(strlen(cwd) + strlen(argv[1]) + 2);
 		snprintf(dir_path, strlen(cwd) + strlen(argv[1]) + 2, "%s/%s", cwd, argv[1]);
-	}
 
 /* Print the contents of the directory */
 	print_directory(dir_path);
 
 /* Free the allocated memory */
-	if (argc > 1)
-	{
 		free(dir_path);
+		}
 	}
 
 	return (EXIT_SUCCESS);
