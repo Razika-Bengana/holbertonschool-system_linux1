@@ -6,12 +6,12 @@
 #include <errno.h>
 
 /**
- * print_directory - Lists the contents of a directory or file
+ * print_dir_files - Lists the contents of a directory or file
  * @path: The path to the directory or file
  * Return: 0 (success)
  */
 
-int print_directory(char *path)
+int print_dir_files(char *path)
 {
 	DIR *dir;
 	struct dirent *ent;
@@ -52,14 +52,14 @@ int print_directory(char *path)
 
 
 /**
- * list_files - Lists the contents of one or more directories or files
+ * list_dir_files - Lists the contents of one or more directories or files
  * specified as command line arguments
  * @argc: argument count (the number of command line arguments)
  * @argv: argument vector (an array of command line argument strings)
  * Return: 0 (success)
  */
 
-int list_files(int argc, char *argv[])
+int list_dir_files(int argc, char *argv[])
 {
 	char cwd[1024];
 	char *dir_path;
@@ -69,7 +69,7 @@ int list_files(int argc, char *argv[])
 	{
 		getcwd(cwd, sizeof(cwd));
 		dir_path = cwd;
-		print_directory(dir_path);
+		print_dir_files(dir_path);
 	}
 
 	else
@@ -84,7 +84,7 @@ int list_files(int argc, char *argv[])
 		snprintf(dir_path, strlen(cwd) + strlen(argv[1]) + 2, "%s/%s", cwd, argv[1]);
 
 /* Print the contents of the directory */
-	print_directory(dir_path);
+	print_dir_files(dir_path);
 
 /* Free the allocated memory */
 		free(dir_path);
