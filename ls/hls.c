@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <dirent.h>
+#include <unistd.h>
+#include <string.h>
+#include <errno.h>
 #include "hls.h"
-
 
 /**
  * main - Main function
@@ -14,43 +16,60 @@
 
 int main(int argc, char *argv[])
 {
+
 	DIR *dir;
 	struct dirent *ent;
 
-	/* Check if a directory was specified as a command-line argument */
-	if (argc == 2)
+/* Check if there are any arguments */
+	if (argc <= 1)
 	{
-		/* Open the specified directory */
-		dir = opendir(argv[1]);
-		if (dir == NULL)
-		{
-			fprintf(stderr, "Cannot open directory: %s\n", argv[1]);
-			return (EXIT_FAILURE);
-		}
+
+/* No arguments provided, use the current working directory */
+		dir = opendir(".");
 	}
+
 	else
 	{
-		/* Open the current working directory */
-		dir = opendir(".");
-		if (dir == NULL)
+/* Loop through all the command-line arguments */
+		for (int i = 1; i < argc; i++)
 		{
-			fprintf(stderr, "Cannot open directory\n");
-			return (EXIT_FAILURE);
+/* Check if the argument is a directory */
+			dir = opendir(argv[i]);
+			if (dir != NULL)
+			{
+				printf("%s\n", argv[i]);
+			}
+
+			else if (errno == ENOTDIR)
+			{
+/* The argument is not a directory, print the file name */
+				printf("%s\t", argv[i]);
+				continue;
+			}
+
+			else
+			{
+/* Error opening the directory, print an error message */
+				fprintf(stderr, "hls: cannot access '%s': %s\n",
+					argv[i], strerror(ENOENT));
+				continue;
+			}
+
+/* Loop through all the entries in the directory */
+			while ((ent = readdir(dir)) != NULL)
+			{
+				if (ent->d_name[0] != '.')
+				{
+					printf("%s\t", ent->d_name);
+				}
+			}
+
+			printf("\n");
 		}
 	}
 
-	/* Loop through all the entries in the directory */
-	while ((ent = readdir(dir)) != NULL)
-	{
-		if (ent->d_name[0] != '.')
-		{
-			printf("%s\t", ent->d_name);
-		}
-	}
-	printf("\n");
+/* Close the directory */
+		closedir(dir);
 
-	/* Close the directory */
-	closedir(dir);
-
-	return (EXIT_SUCCESS);
+		return (EXIT_SUCCESS);
 }
