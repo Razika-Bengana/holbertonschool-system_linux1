@@ -30,7 +30,8 @@ int main(int argc, char *argv[])
 	else
 	{
 /* Loop through all the command-line arguments */
-		for (int i = 1; i < argc; i++)
+		int i;
+		for (i = 1; i < argc; i++)
 		{
 /* Check if the argument is a directory */
 			dir = opendir(argv[i]);
