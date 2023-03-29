@@ -122,9 +122,9 @@ void race_state(int *id, size_t size)
 		return;
 	}
 
-	size_t i;
+	int i;
 
-	for (i = 0; i < size; i++)
+	for (i = 0; i < (int) size; i++)
 	{
 		int car_idx = find_car(id[i]);
 
@@ -143,7 +143,7 @@ void race_state(int *id, size_t size)
 
 	printf("Race state:\n");
 
-	for (i = 0; i < (size_t) race->num_cars; i++)
+	for (i = 0; i < race->num_cars; i++)
 	{
 		printf("Car %d [%d laps]\n", race->cars[i].id, race->cars[i].laps);
 	}
