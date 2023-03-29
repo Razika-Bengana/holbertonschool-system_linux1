@@ -3,13 +3,15 @@
 #include <string.h>
 #include "_getline.h"
 
-// Define the READ_SIZE macro based on whether we want to count calls to read or not
+/* Define the READ_SIZE macro based on whether
+ * we want to count calls to read or not
+ */
 #ifdef COUNT_READ_CALLS
 #undef READ_SIZE
 #define READ_SIZE 1
 #endif
 
-// Define a macro to override malloc to initialize allocated memory to 0xFF
+/* Define a macro to override malloc to initialize allocated memory to 0xFF */
 #define malloc(size) memset(malloc(size), 0xFF, size)
 
 #define BUFFER_SIZE 1024
@@ -44,7 +46,7 @@ char *_getline(const int fd)
 					pos = i;
 					return (line);
 				}
-				// Otherwise, return NULL
+				/* Otherwise, return NULL */
 				return (NULL);
 			}
 		}
