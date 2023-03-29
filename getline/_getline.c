@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 #include "_getline.h"
 
 #define BUFFER_SIZE 1024
