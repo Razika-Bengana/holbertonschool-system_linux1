@@ -37,6 +37,7 @@ int find_car(int id)
 {
 /* get the race struct pointer */
 	Race *race = get_race();
+	int i;
 
 /* if race struct has not been initialized, return -1 */
 	if (race == NULL)
@@ -44,7 +45,6 @@ int find_car(int id)
 		return (-1);
 	}
 
-	int i;
 /* search through the array of cars for a car with the given id */
 	for (i = 0; i < race->num_cars; i++)
 	{
@@ -113,6 +113,7 @@ void race_state(int *id, size_t size)
 {
 /* get the race struct pointer */
 	Race *race = get_race();
+	int i;
 
 /* if size of car id array is 0, free allocated memory and return */
 	if (size == 0)
@@ -121,8 +122,6 @@ void race_state(int *id, size_t size)
 		race->num_cars = 0;
 		return;
 	}
-
-	int i;
 
 	for (i = 0; i < (int) size; i++)
 	{
