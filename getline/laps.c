@@ -43,8 +43,10 @@ int find_car(int id)
 	{
 		return (-1);
 	}
+
+	int i;
 /* search through the array of cars for a car with the given id */
-	for (int i = 0; i < race->num_cars; i++)
+	for (i = 0; i < race->num_cars; i++)
 	{
 		if (race->cars[i].id == id)
 		{
@@ -82,10 +84,11 @@ void add_car(int id, Race *race)
 
 void sort_cars(Race *race)
 {
+	int i, j;
 /* sort the cars in the array of cars in the race by their id */
-	for (int i = 0; i < race->num_cars - 1; i++)
+	for (i = 0; i < race->num_cars - 1; i++)
 	{
-		for (int j = i + 1; j < race->num_cars; j++)
+		for (j = i + 1; j < race->num_cars; j++)
 		{
 			if (race->cars[i].id > race->cars[j].id)
 			{
@@ -119,7 +122,9 @@ void race_state(int *id, size_t size)
 		return;
 	}
 
-	for (size_t i = 0; i < size; i++)
+	size_t i;
+
+	for (i = 0; i < size; i++)
 	{
 		int car_idx = find_car(id[i]);
 
@@ -137,7 +142,8 @@ void race_state(int *id, size_t size)
 
 
 	printf("Race state:\n");
-	for (int i = 0; i < race->num_cars; i++)
+
+	for (i = 0; i < (size_t) race->num_cars; i++)
 	{
 		printf("Car %d [%d laps]\n", race->cars[i].id, race->cars[i].laps);
 	}
