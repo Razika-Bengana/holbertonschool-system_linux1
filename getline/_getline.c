@@ -3,13 +3,14 @@
 #include <string.h>
 #include "_getline.h"
 
-#define BUFFER_SIZE 1024
+#define BUFFER_SIZE 1
 
 char *_getline(const int fd)
 {
 	static char buffer[BUFFER_SIZE];
 	static int pos;
 	static int size;
+	static int read_count;
 
 	char *line = NULL;
 	int i = pos;
@@ -22,6 +23,7 @@ char *_getline(const int fd)
 			pos = 0;
 			i = 0;
 			size = read(fd, buffer, BUFFER_SIZE);
+			read_count++;
 			if (size <= 0)
 			{
 /* If there's no more data to read, return NULL */
