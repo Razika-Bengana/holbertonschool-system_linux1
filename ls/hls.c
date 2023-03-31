@@ -99,4 +99,5 @@ No such file or directory\n", argv[optind]);
 			optind++;
 		}
 	}
+	return (0);
 }
