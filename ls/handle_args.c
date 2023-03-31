@@ -35,6 +35,7 @@ void handle_args(char *dir_arg, char *file, int flag_all,
 
 /* open directory */
 	DIR *dir = opendir(dir_arg);
+	struct dirent *dir_entry;
 
 	if (dir == NULL)
 	{
@@ -43,7 +44,6 @@ void handle_args(char *dir_arg, char *file, int flag_all,
 	}
 
 /* read and print directory/file data */
-	struct dirent *dir_entry;
 
 	errno = 0;
 
