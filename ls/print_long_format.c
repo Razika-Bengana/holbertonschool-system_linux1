@@ -12,6 +12,9 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 {
 	struct stat statbuf;
 	char fp[PATH_MAX];
+	struct passwd *pw;
+	struct group *gid;
+	char *time_str;
 
 	sprintf(fp, "%s/%s", dir_arg, dir_entry->d_name);
 	if (stat(fp, &statbuf) == -1)
@@ -34,8 +37,6 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	printf("%li ", statbuf.st_nlink);
 
 /* group and user data */
-	struct passwd *pw;
-	struct group *gid;
 
 	pw = getpwuid(statbuf.st_uid);
 	if (pw == NULL)
@@ -63,7 +64,6 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	printf("%5ld ", statbuf.st_size);
 
 /* timestamp */
-	char *time_str;
 	time_t t = statbuf.st_mtime;
 
 	time_str = ctime(&t);
