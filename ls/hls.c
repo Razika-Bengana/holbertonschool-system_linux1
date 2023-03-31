@@ -1,75 +1,102 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <dirent.h>
-#include <string.h>
-#include <errno.h>
 #include "hls.h"
 
 /**
- * main - Main function
- * Lists the content of the current directory by using hls
- * @argc: argument count (the number of command line arguments)
- * @argv: argument vector (an array of command line argument strings)
- * Return: 0 (success)
+ * main - main function;
+ * parses command-line arguments, sets flags based on the specific options,
+ * and calls the handle_args function to handle each command line arguments
+ * @argc: number of command line arguments
+ * @argv: array of command-line arguments
+ * Return: O if success, -1 if the program fails
  */
 
+/* main function */
 int main(int argc, char *argv[])
 {
 
-	DIR *dir;
-	struct dirent *ent;
+/* initialize flags */
+	int flag_long = 0;
+	int flag_all = 0;
+	int flag_file = 0;
+	int flag_one = 0;
+	int flag_A = 0;
 
-/* Check if there are any arguments */
-	if (argc <= 1)
+/* get options */
+	int opt;
+
+	while ((opt = getopt(argc, argv, "al1A")) != -1)
 	{
+		switch (opt)
+		{
+		case 'l':
+			flag_long = 1;
+			break;
+		case 'a':
+			flag_all = 1;
+			break;
+		case '1':
+			flag_one = 1;
+			break;
+		case 'A':
+			flag_A = 1;
+			break;
 
-/* No arguments provided, use the current working directory */
-		dir = opendir(".");
+		default:
+			fprintf(stderr, "myls: supports -l, -a, -1 and -A options\n");
+			exit(EXIT_FAILURE);
+		}
 	}
 
-	else
+/* check command line args and call print_args with appropriate parameters */
+	if (optind == argc)
 	{
-/* Loop through all the command-line arguments */
-		int i;
-		for (i = 1; i < argc; i++)
+		handle_args(".", "NULL", flag_all, flag_long, flag_file, flag_one, flag_A);
+		if (flag_long == 0 && flag_one == 0)
 		{
-/* Check if the argument is a directory */
-			dir = opendir(argv[i]);
-			if (dir != NULL)
-			{
-				printf("%s\n", argv[i]);
-			}
-
-			else if (errno == ENOTDIR)
-			{
-/* The argument is not a directory, print the file name */
-				printf("%s\t", argv[i]);
-				continue;
-			}
-
-			else
-			{
-/* Error opening the directory, print an error message */
-				fprintf(stderr, "hls: cannot access '%s': %s\n",
-					argv[i], strerror(ENOENT));
-				continue;
-			}
-
-/* Loop through all the entries in the directory */
-			while ((ent = readdir(dir)) != NULL)
-			{
-				if (ent->d_name[0] != '.')
-				{
-					printf("%s\t", ent->d_name);
-				}
-			}
-
 			printf("\n");
 		}
 	}
 
-/* Close the directory */
-		closedir(dir);
+	else
+	{
+		while (optind < argc)
+		{
+			struct stat argbuf;
+			char *arg = argv[optind];
 
-		return (EXIT_SUCCESS);
+			if ((stat(arg, &argbuf)) == -1)
+			{
+				printf("./hls: cannot access '%s':\
+No such file or directory\n", argv[optind]);
+			}
+
+			else
+			{
+				if (S_ISREG(argbuf.st_mode))
+				{
+					flag_file = 1;
+					handle_args(".", arg, flag_all,
+						    flag_long, flag_file, flag_one, flag_A);
+				}
+
+				if (S_ISDIR(argbuf.st_mode))
+				{
+					printf("%s:\n", arg);
+					handle_args(arg, "NULL", flag_all,
+						    flag_long, flag_file, flag_one, flag_A);
+				}
+				flag_file = 0;
+
+				if (optind < argc - 1)
+				{
+					printf("\n");
+				}
+
+				if (flag_long == 0 && flag_one == 0)
+				{
+					printf("\n");
+				}
+			}
+			optind++;
+		}
+	}
 }
