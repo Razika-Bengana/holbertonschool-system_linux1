@@ -18,9 +18,9 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	time_t t = statbuf.st_mtime;
 
 	sprintf(fp, "%s/%s", dir_arg, dir_entry->d_name);
-	if (stat(fp, &statbuf) == -1)
+	if (lstat(fp, &statbuf) == -1)
 	{
-		perror("stat");
+		perror("lstat");
 		return;
 	}
 
