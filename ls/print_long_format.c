@@ -73,7 +73,7 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	}
 
 /* Remove the trailing newline */
-	time_str[strlen(time_str) - 1] = '\0';
+	time_str[strcspn(time_str, "\n")] = '\0';
 	printf("%s ", time_str);
 
 /* file name */
