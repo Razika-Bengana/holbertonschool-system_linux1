@@ -4,11 +4,12 @@
 size_t my_str_len_until(const char *str, char c)
 {
 	size_t len = 0;
+
 	while (str[len] != '\0' && str[len] != c)
 	{
 		len++;
 	}
-	return len;
+	return (len);
 }
 
 
@@ -28,6 +29,9 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	struct group *gid;
 	char *time_str;
 	time_t t;
+	char size_str[20];
+
+	t = statbuf.st_mtime;
 
 	sprintf(fp, "%s/%s", dir_arg, dir_entry->d_name);
 	if (lstat(fp, &statbuf) == -1)
@@ -35,8 +39,6 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 		perror("lstat");
 		return;
 	}
-
-	t = statbuf.st_mtime;
 
 /* permission data/nlink */
 	printf((S_ISDIR(statbuf.st_mode)) ? "d" : "-");
@@ -76,9 +78,8 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	}
 
 /* file size */
-	char size_str[20];
-        sprintf(size_str, "%ld", statbuf.st_size);
-        printf("%*s ", (int)(5 - my_str_len_until(size_str, '\0')), size_str);
+	sprintf(size_str, "%ld", statbuf.st_size);
+	printf("%*s ", (int)(5 - my_str_len_until(size_str, '\0')), size_str);
 
 /* timestamp */
 	time_str = ctime(&t);
