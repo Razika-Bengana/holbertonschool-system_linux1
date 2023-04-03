@@ -1,4 +1,5 @@
 #include "hls.h"
+#include <getopt.h>
 
 /**
  * main - main function;
@@ -20,10 +21,19 @@ int main(int argc, char *argv[])
 	int flag_one = 0;
 	int flag_A = 0;
 
+/* define long options */
+	struct option long_options[] = {
+		{"long", no_argument, NULL, 'l'},
+		{"all", no_argument, NULL, 'a'},
+		{"one", no_argument, NULL, '1'},
+		{"almost-all", no_argument, NULL, 'A'},
+		{NULL, 0, NULL, 0}
+	};
 /* get options */
 	int opt;
+	int option_index = 0;
 
-	while ((opt = getopt(argc, argv, "al1A")) != -1)
+	while ((opt = getopt_long(argc, argv, "al1A", long_options, &option_index)) != -1)
 	{
 		switch (opt)
 		{
