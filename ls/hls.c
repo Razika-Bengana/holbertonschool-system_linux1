@@ -63,7 +63,7 @@ int main(int argc, char *argv[])
 			struct stat argbuf;
 			char *arg = argv[optind];
 
-			if ((stat(arg, &argbuf)) == -1)
+			if ((lstat(arg, &argbuf)) == -1)
 			{
 				printf("./hls: cannot access '%s':\
 No such file or directory\n", argv[optind]);
