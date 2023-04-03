@@ -1,5 +1,17 @@
 #include "hls.h"
 
+
+size_t my_str_len_until(const char *str, char c)
+{
+	size_t len = 0;
+	while (str[len] != '\0' && str[len] != c)
+	{
+		len++;
+	}
+	return len;
+}
+
+
 /**
  * print_long - function that prints file or directory infos
  * in long format, including permissions and owners/groups
@@ -15,7 +27,7 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	struct passwd *pw;
 	struct group *gid;
 	char *time_str;
-	time_t t = statbuf.st_mtime;
+	time_t t;
 
 	sprintf(fp, "%s/%s", dir_arg, dir_entry->d_name);
 	if (lstat(fp, &statbuf) == -1)
@@ -23,6 +35,8 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 		perror("lstat");
 		return;
 	}
+
+	t = statbuf.st_mtime;
 
 /* permission data/nlink */
 	printf((S_ISDIR(statbuf.st_mode)) ? "d" : "-");
@@ -62,7 +76,9 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	}
 
 /* file size */
-	printf("%5ld ", statbuf.st_size);
+	char size_str[20];
+        sprintf(size_str, "%ld", statbuf.st_size);
+        printf("%*s ", (int)(5 - my_str_len_until(size_str, '\0')), size_str);
 
 /* timestamp */
 	time_str = ctime(&t);
@@ -73,7 +89,7 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	}
 
 /* Remove the trailing newline */
-	time_str[strcspn(time_str, "\n")] = '\0';
+	time_str[my_str_len_until(time_str, '\0') - 1] = '\0';
 	printf("%s ", time_str);
 
 /* file name */

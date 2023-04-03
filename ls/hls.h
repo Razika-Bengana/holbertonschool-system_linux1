@@ -24,4 +24,5 @@ void handle_print_flags(char *dir_arg, struct dirent *dir_entry, int flag_all,
 int my_strcmp(const char *str1, const char *str2);
 void handle_args(char *dir_arg, char *file, int flag_all, int flag_long,
 		 int flag_file, int flag_one, int flag_A);
+size_t my_str_len_until(const char *str, char c);
 #endif /* HLS_H */
