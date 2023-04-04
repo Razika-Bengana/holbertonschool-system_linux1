@@ -20,14 +20,16 @@ int main(int argc, char *argv[])
 	int flag_one = 0;
 	int flag_A = 0;
 
+	int i;
+	int j;
 /* iterate over each command-line argument */
-	for (int i = 1; i < argc; i++)
+	for (i = 1; i < argc; i++)
 	{
 /* check if the argument is an option */
 		if (argv[i][0] == '-')
 		{
 /* iterate over each character in the option string */
-			for (int j = 1; j < (int)strlen(argv[i]); j++)
+			for (j = 1; j < (int)strlen(argv[i]); j++)
 			{
 				switch (argv[i][j])
 				{
