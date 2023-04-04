@@ -1,5 +1,16 @@
 #include "hls.h"
 
+/* function to calculate length of string */
+int mystrlen(const char *str)
+{
+	int len = 0;
+	while (str[len] != '\0')
+	{
+		len++;
+	}
+	return len;
+}
+
 /**
  * main - main function;
  * parses command-line arguments, sets flags based on the specific options,
@@ -29,7 +40,7 @@ int main(int argc, char *argv[])
 		if (argv[i][0] == '-')
 		{
 /* iterate over each character in the option string */
-			for (j = 1; j < (int)strlen(argv[i]); j++)
+			for (j = 1; j < (int)mystrlen(argv[i]); j++)
 			{
 				switch (argv[i][j])
 				{
@@ -60,7 +71,7 @@ int main(int argc, char *argv[])
 
 			if ((lstat(arg, &argbuf)) == -1)
 			{
-				printf("./hls: cannot access '%s': No such file or directory\n", arg);
+				printf("./hls_01: cannot access '%s': No such file or directory\n", arg);
 			}
 			else
 			{
