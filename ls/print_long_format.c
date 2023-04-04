@@ -1,7 +1,7 @@
 #include "hls.h"
 
 
-size_t my_str_len_until(const char *str, char c)
+size_t my_str_len(const char *str, char c)
 {
 	size_t len = 0;
 
@@ -79,7 +79,7 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 
 /* file size */
 	sprintf(size_str, "%ld", statbuf.st_size);
-	printf("%*s ", (int)(5 - my_str_len_until(size_str, '\0')), size_str);
+	printf("%*s ", (int)(5 - my_str_len(size_str, '\0')), size_str);
 
 /* timestamp */
 	time_str = ctime(&t);
@@ -90,7 +90,7 @@ void print_long(char *dir_arg, struct dirent *dir_entry)
 	}
 
 /* Remove the trailing newline */
-	time_str[my_str_len_until(time_str, '\0') - 1] = '\0';
+	time_str[my_str_len(time_str, '\0') - 1] = '\0';
 	printf("%s ", time_str);
 
 /* file name */

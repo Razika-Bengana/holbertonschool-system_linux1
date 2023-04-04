@@ -1,5 +1,4 @@
 #include "hls.h"
-#include <getopt.h>
 
 /**
  * main - main function;
@@ -21,64 +20,46 @@ int main(int argc, char *argv[])
 	int flag_one = 0;
 	int flag_A = 0;
 
-/* define long options */
-	struct option long_options[] = {
-		{"long", no_argument, NULL, 'l'},
-		{"all", no_argument, NULL, 'a'},
-		{"one", no_argument, NULL, '1'},
-		{"almost-all", no_argument, NULL, 'A'},
-		{NULL, 0, NULL, 0}
-	};
-/* get options */
-	int opt;
-	int option_index = 0;
-
-	while ((opt = getopt_long(argc, argv, "al1A", long_options, &option_index)) != -1)
+/* iterate over each command-line argument */
+	for (int i = 1; i < argc; i++)
 	{
-		switch (opt)
+/* check if the argument is an option */
+		if (argv[i][0] == '-')
 		{
-		case 'l':
-			flag_long = 1;
-			break;
-		case 'a':
-			flag_all = 1;
-			break;
-		case '1':
-			flag_one = 1;
-			break;
-		case 'A':
-			flag_A = 1;
-			break;
+/* iterate over each character in the option string */
+			for (int j = 1; j < (int)strlen(argv[i]); j++)
+			{
+				switch (argv[i][j])
+				{
+				case 'l':
+					flag_long = 1;
+					break;
+				case 'a':
+					flag_all = 1;
+					break;
+				case '1':
+					flag_one = 1;
+					break;
+				case 'A':
+					flag_A = 1;
+					break;
 
-		default:
-			fprintf(stderr, "myls: supports -l, -a, -1 and -A options\n");
-			exit(EXIT_FAILURE);
+				default:
+					fprintf(stderr, "myls: supports -l, -a, -1 and -A options\n");
+					exit(EXIT_FAILURE);
+				}
+			}
 		}
-	}
-
-/* check command line args and call print_args with appropriate parameters */
-	if (optind == argc)
-	{
-		handle_args(".", "NULL", flag_all, flag_long, flag_file, flag_one, flag_A);
-		if (flag_long == 0 && flag_one == 0)
-		{
-			printf("\n");
-		}
-	}
-
-	else
-	{
-		while (optind < argc)
+/* if the argument is not an option, handle it as a file/directory name */
+		else
 		{
 			struct stat argbuf;
-			char *arg = argv[optind];
+			char *arg = argv[i];
 
 			if ((lstat(arg, &argbuf)) == -1)
 			{
-				printf("./hls: cannot access '%s':\
-No such file or directory\n", argv[optind]);
+				printf("./hls: cannot access '%s': No such file or directory\n", arg);
 			}
-
 			else
 			{
 				if (S_ISREG(argbuf.st_mode))
@@ -96,7 +77,7 @@ No such file or directory\n", argv[optind]);
 				}
 				flag_file = 0;
 
-				if (optind < argc - 1)
+				if (i < argc - 1)
 				{
 					printf("\n");
 				}
@@ -106,8 +87,17 @@ No such file or directory\n", argv[optind]);
 					printf("\n");
 				}
 			}
-			optind++;
 		}
 	}
+/* if no command-line arguments were provided, handle the current directory */
+	if (argc == 1)
+	{
+		handle_args(".", "NULL", flag_all, flag_long, flag_file, flag_one, flag_A);
+		if (flag_long == 0 && flag_one == 0)
+		{
+			printf("\n");
+		}
+	}
+
 	return (0);
 }
