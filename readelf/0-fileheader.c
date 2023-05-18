@@ -97,9 +97,10 @@ int main(int argc, char *argv[])
 
 	const char *filename;
 	Elf64_Ehdr elf_header;
+	FILE *file;
 
 	filename = argv[1];
-	FILE *file = fopen(filename, "rb");
+	file = fopen(filename, "rb");
 	if (!file)
 	{
 		fprintf(stderr, "Error opening file: %s\n", filename);
