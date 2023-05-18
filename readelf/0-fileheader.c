@@ -89,15 +89,15 @@ void print_elf_header(Elf64_Ehdr *elf_header)
 
 int main(int argc, char *argv[])
 {
+	const char *filename;
+	Elf64_Ehdr elf_header;
+	FILE *file;
+	
 	if (argc != 2)
 	{
 		fprintf(stderr, "Usage: %s elf_filename\n", argv[0]);
 		return 1;
 	}
-
-	const char *filename;
-	Elf64_Ehdr elf_header;
-	FILE *file;
 
 	filename = argv[1];
 	file = fopen(filename, "rb");
