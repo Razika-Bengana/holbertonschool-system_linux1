@@ -2,9 +2,11 @@
 
 void print_elf_header(Elf64_Ehdr *elf_header)
 {
+	int i;
+
 	printf("ELF Header:\n");
 	printf("  Magic:  ");
-	for (int i = 0; i < EI_NIDENT; ++i)
+	for (i = 0; i < EI_NIDENT; ++i)
 		printf("%02x ", elf_header->e_ident[i]);
 	printf("\n");
 	printf("  Class:                             %s\n", elf_header->e_ident[EI_CLASS] == ELFCLASS32 ? "ELF32" : "ELF64");
@@ -93,7 +95,10 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	const char *filename = argv[1];
+	const char *filename;
+	Elf64_Ehdr elf_header;
+
+	filename = argv[1];
 	FILE *file = fopen(filename, "rb");
 	if (!file)
 	{
@@ -101,7 +106,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	Elf64_Ehdr elf_header;
 	if (fread(&elf_header, sizeof(elf_header), 1, file) != 1)
 	{
 		fprintf(stderr, "Error reading ELF header\n");
