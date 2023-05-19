@@ -33,6 +33,6 @@ void handle_errors(char *format, char *errorString, FileInfo *fileInfo);
 void init_file_info(FileInfo *fileInfo);
 int open_elf_file(FileInfo *fileInfo);
 int print_elf_header(FileInfo *fileInfo);
-const char *get_machine_name(Elf64_Half e_machine);
+const char *get_machine_name(uint16_t machine);
 
 #endif /* H_HEADER_H */
