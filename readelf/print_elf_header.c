@@ -48,6 +48,8 @@ int print_elf_header(FileInfo *fileInfo)
 	printf("  Number of program headers:         %u\n",
 	       fileInfo->header.e_phnum);
 	printf("  Size of section headers:           %u (bytes)\n",
+	       fileInfo->header.e_shentsize);
+	printf("  Number of section headers:         %u\n",
 	       fileInfo->header.e_shnum);
 	printf("  Section header string table index: %u\n",
 	       fileInfo->header.e_shstrndx);
