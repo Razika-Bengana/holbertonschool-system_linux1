@@ -1,6 +1,7 @@
 #ifndef H_HEADER_H
 #define H_HEADER_H
 
+#include <elf.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
@@ -11,7 +12,6 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <errno.h>
-#include <elf.h>
 
 typedef struct FileInfo {
     char *programName;
