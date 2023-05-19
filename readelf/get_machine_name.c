@@ -1,5 +1,4 @@
 #include "header.h"
-#include <elf.h>
 
 /**
  * get_machine_name - Convert machine code to string
@@ -56,8 +55,6 @@ const char *get_machine_name(uint16_t machine)
         case EM_TINYJ:      return "Advanced Logic Corp. TinyJ embedded processor";
         case EM_X86_64:     return "AMD x86-64";
         case EM_PDSP:       return "Sony DSP Processor";
-        case EM_PDP10:      return "Digital Equipment Corp. PDP-10";
-        case EM_PDP11:      return "Digital Equipment Corp. PDP-11";
         case EM_FX66:       return "Siemens FX66 microcontroller";
         case EM_ST7:        return "STMicroelectronics ST7 8-bit microcontroller";
         case EM_68HC16:     return "Motorola MC68HC16 Microcontroller";
