@@ -6,10 +6,12 @@
  * Return: String representation of the machine
  */
 
-const char *get_machine_name(uint16_t machine)
+const char *get_machine_name(Elf64_Half e_machine)
 {
-    switch (machine)
-    {
+	static char buff[64] = {'\0'};
+
+	switch (e_machine)
+	{
         case EM_NONE:       return "None";
         case EM_M32:        return "WE32100";
         case EM_SPARC:      return "Sparc";
@@ -53,8 +55,7 @@ const char *get_machine_name(uint16_t machine)
         case EM_ME16:       return "Toyota ME16 processor";
         case EM_ST100:      return "STMicroelectronics ST100 processor";
         case EM_TINYJ:      return "Advanced Logic Corp. TinyJ embedded processor";
-        case EM_X86_64:     return "AMD x86-64";
-        case EM_PDSP:       return "Sony DSP Processor";
+        case EM_X86_64:     return "Advanced Micro Devices X86-64";
         case EM_FX66:       return "Siemens FX66 microcontroller";
         case EM_ST7:        return "STMicroelectronics ST7 8-bit microcontroller";
         case EM_68HC16:     return "Motorola MC68HC16 Microcontroller";
@@ -88,6 +89,7 @@ const char *get_machine_name(uint16_t machine)
         case EM_TILEGX:     return "Tilera TILE-Gx multicore architecture family";
 
         default:
-            return "Unknown";
-    }
+		snprintf(buff, sizeof(buff), "<unknown>: 0x%x", e_machine);
+		return buff;
+	}
 }
