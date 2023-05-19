@@ -1,12 +1,11 @@
 #include "header.h"
+#include <elf.h>
 
 /**
  * get_machine_name - Convert machine code to string
- * @e_machine: Machine code
+ * @machine: Machine code
  * Return: String representation of the machine
  */
-
-#include "header.h"
 
 const char *get_machine_name(uint16_t machine)
 {
