@@ -24,7 +24,7 @@ typedef struct FileInfo {
     Elf64_Ehdr header;
 } FileInfo;
 
-// Define missing constants for PDP10 and PDP11
+/* Define missing constants for PDP10 and PDP11 */
 #ifndef EM_PDP10
 #define EM_PDP10 18
 #endif
