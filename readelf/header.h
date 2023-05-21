@@ -24,7 +24,6 @@ typedef struct FileInfo {
     Elf64_Ehdr header;
 } FileInfo;
 
-int main(int argc, char **argv);
 void free_memory(FileInfo *fileInfo);
 int get_elf_header(FileInfo *fileInfo);
 const char *get_elf_type(Elf64_Half e_type);
