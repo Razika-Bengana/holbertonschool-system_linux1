@@ -11,15 +11,15 @@ const char *get_elf_type(Elf64_Half e_type)
 
 	switch (e_type)
 	{
-        case 1:
+	case 1:
 		return ("REL (Relocatable file)");
-        case 2:
+	case 2:
 		return ("EXEC (Executable file)");
-        case 3:
+	case 3:
 		return ("DYN (Shared object file)");
-        case 4:
+	case 4:
 		return ("CORE");
-        default:
+	default:
 		snprintf(buffer, sizeof(buffer), "<unknown: %x>", e_type);
 		return (buffer);
 	}

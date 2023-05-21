@@ -1,7 +1,7 @@
 #include "header.h"
 
 /**
- * print_elf_header - Prints the file header
+ * print_elf_header - function that prints the file header
  * @fileInfo: Pointer to the FileInfo structure
  * Return: 0 (success)
  */

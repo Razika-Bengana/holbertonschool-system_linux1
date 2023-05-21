@@ -3,6 +3,7 @@
 /**
  * free_memory - frees allocated memory
  * @fileInfo: pointer to the struct
+ * Return: nothing (void)
  */
 void free_memory(FileInfo *fileInfo)
 {

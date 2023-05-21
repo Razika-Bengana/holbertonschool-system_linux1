@@ -14,33 +14,33 @@ const char *get_operating_system_abi(unsigned char osabi)
 	{
 	case ELFOSABI_NONE:
 		return ("UNIX - System V");
-        case ELFOSABI_HPUX:
+	case ELFOSABI_HPUX:
 		return ("UNIX - HP-UX");
-        case ELFOSABI_NETBSD:
+	case ELFOSABI_NETBSD:
 		return ("UNIX - NetBSD");
-        case ELFOSABI_GNU:
+	case ELFOSABI_GNU:
 		return ("UNIX - GNU");
-        case ELFOSABI_SOLARIS:
+	case ELFOSABI_SOLARIS:
 		return ("UNIX - Solaris");
-        case ELFOSABI_AIX:
+	case ELFOSABI_AIX:
 		return ("UNIX - AIX");
-        case ELFOSABI_IRIX:
+	case ELFOSABI_IRIX:
 		return ("UNIX - IRIX");
-        case ELFOSABI_FREEBSD:
+	case ELFOSABI_FREEBSD:
 		return ("UNIX - FreeBSD");
-        case ELFOSABI_TRU64:
+	case ELFOSABI_TRU64:
 		return ("UNIX - TRU64");
-        case ELFOSABI_MODESTO:
+	case ELFOSABI_MODESTO:
 		return ("Novell - Modesto");
-        case ELFOSABI_OPENBSD:
+	case ELFOSABI_OPENBSD:
 		return ("UNIX - OpenBSD");
-        case ELFOSABI_ARM:
+	case ELFOSABI_ARM:
 		return ("ARM");
-        case ELFOSABI_ARM_AEABI:
+	case ELFOSABI_ARM_AEABI:
 		return ("ARM EABI");
-        case ELFOSABI_STANDALONE:
+	case ELFOSABI_STANDALONE:
 		return ("Standalone App");
-        default:
+	default:
 		snprintf(buffer, sizeof(buffer), "<unknown: %x>", osabi);
 		return (buffer);
 	}

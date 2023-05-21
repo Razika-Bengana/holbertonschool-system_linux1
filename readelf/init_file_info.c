@@ -3,6 +3,7 @@
 /**
  * init_file_info - Initialize variables of the file
  * @fileInfo: Pointer to the FileInfo structure
+ * Return: nothing (void)
  */
 
 void init_file_info(FileInfo *fileInfo)
