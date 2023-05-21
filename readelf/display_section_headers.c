@@ -11,6 +11,7 @@ void display_section_headers(const char *filename)
 	}
 
 	Elf64_Ehdr elf_header;
+	Elf64_Shdr section_header;
 
 	if (fread(&elf_header, sizeof(elf_header), 1, file) != 1)
 	{
@@ -19,8 +20,6 @@ void display_section_headers(const char *filename)
 	}
 
 	fseek(file, elf_header.e_shoff, SEEK_SET);
-
-	Elf64_Shdr section_header;
 
 	printf("There are %d section headers, starting at offset 0x%lx:\n",
 	       elf_header.e_shnum, elf_header.e_shoff);
