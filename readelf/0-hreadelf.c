@@ -29,10 +29,6 @@ int main(int argc, char **argv)
 		if (flag == 0)
 		{
 			flag = print_elf_header(&fileInfo);
-			if (flag == 0)
-                        {
-				display_section_headers(fileInfo.fileName);
-                        }
 		}
 		else
 		{
