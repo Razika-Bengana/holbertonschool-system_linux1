@@ -34,5 +34,6 @@ void init_file_info(FileInfo *fileInfo);
 int open_elf_file(FileInfo *fileInfo);
 int print_elf_header(FileInfo *fileInfo);
 const char *get_machine_name(uint16_t machine);
+void display_section_headers(const char *filename);
 
 #endif /* H_HEADER_H */
