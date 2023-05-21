@@ -65,7 +65,7 @@ const char *getSecFlags(Elf64_Xword sh_flags)
         case SHF_OS_NONCONFORMING: *p = 'O'; break;
         case SHF_GROUP: *p = 'G'; break;
         case SHF_TLS: *p = 'T'; break;
-        case 2147483648: *p = 'E'; break; // SHF_EXCLUDE
+        case 2147483648: *p = 'E'; break;
         default:
             if (flag & SHF_MASKOS)
             {
