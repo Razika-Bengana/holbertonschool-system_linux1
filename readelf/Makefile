@@ -4,47 +4,24 @@ CC = gcc
 # Compiler flags
 CFLAGS = -Wall -Werror -Wextra -pedantic
 
-# Source files
-SRCS = free_memory.c get_elf_header.c \
-        get_elf_type.c get_operating_system_abi.c \
-        handle_errors.c header.h init_file_info.c \
-        open_elf_file.c print_elf_header.c get_machine_name.c
+# Target: 0-hreadelf
+0-hreadelf: 0-hreadelf.o header.h get_elf_header.o get_machine_name.o handle_errors.o \
+            init_file_info.o print_elf_header.o free_memory.o get_elf_type.o \
+            get_operating_system_abi.o open_elf_file.o
+	$(CC) $(CFLAGS) $^ -o $@
 
-# Object files
-OBJS = $(SRCS:.c=.o)
+# Target: 1-hreadelf
+1-hreadelf: 1-hreadelf.o header.h get_elf_header.o \
+            get_machine_name.o handle_errors.o init_file_info.o print_elf_header.o \
+            free_memory.o get_elf_type.o get_operating_system_abi.o open_elf_file.o \
+	    get_sections_headers.o print_sections_headers.o get_sections_types.o \
+	    get_section_header_str_table.c
+	$(CC) $(CFLAGS) $^ -o $@
 
-# Rule to compile source files
+# Rule to compile %.o from %.c
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Target: 0-hreadelf
-0-hreadelf: 0-hreadelf.o $(OBJS)
-	$(CC) $(CFLAGS) 0-hreadelf.o $(OBJS) -o 0-hreadelf
-
-# Target: 1-hreadelf
-1-hreadelf: 1-hreadelf.o display_section_headers.o $(OBJS)
-	$(CC) $(CFLAGS) 1-hreadelf.o display_section_headers.o $(OBJS) -o 1-hreadelf
-
-# Target: 2-hreadelf
-2-hreadelf: 2-hreadelf.o $(OBJS)
-	$(CC) $(CFLAGS) 2-hreadelf.o $(OBJS) -o 2-hreadelf
-
-# Rule to compile 0-hreadelf.c
-0-hreadelf.o: 0-hreadelf.c
-	$(CC) $(CFLAGS) -c 0-hreadelf.c -o 0-hreadelf.o
-
-# Rule to compile 1-hreadelf.c
-1-hreadelf.o: 1-hreadelf.c
-	$(CC) $(CFLAGS) -c 1-hreadelf.c -o 1-hreadelf.o
-
-# Rule to compile 2-hreadelf.c
-2-hreadelf.o: 2-hreadelf.c
-	$(CC) $(CFLAGS) -c 2-hreadelf.c -o 2-hreadelf.o
-
-# Rule to compile display_section_headers.c
-display_section_headers.o: display_section_headers.c
-	$(CC) $(CFLAGS) -c display_section_headers.c -o display_section_headers.o
-
 # Rule to clean the build artifacts
 clean:
-	rm -f $(OBJS) 0-hreadelf 1-hreadelf 2-hreadelf
+	rm -f *.o 0-hreadelf 1-hreadelf

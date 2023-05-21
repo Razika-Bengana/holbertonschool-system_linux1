@@ -22,6 +22,8 @@ typedef struct FileInfo {
     _Bool isBigEndian;
     FILE *stream;
     Elf64_Ehdr header;
+    Elf64_Shdr *sectionHeaders;
+    char *sectionHeaderStringTable;
 } FileInfo;
 
 void free_memory(FileInfo *fileInfo);
@@ -33,6 +35,18 @@ void init_file_info(FileInfo *fileInfo);
 int open_elf_file(FileInfo *fileInfo);
 int print_elf_header(FileInfo *fileInfo);
 const char *get_machine_name(uint16_t machine);
-void display_section_headers(const char *filename);
+
+int getSecHeaders(FILE *file, FileInfo *fileInfo);
+int get64bitSecHeaders(FILE *file, FileInfo *fileInfo);
+int get32bitSecHeaders(FILE *file, FileInfo *fileInfo);
+void bswapElf64_Shdr(Elf64_Shdr *shdr64);
+void bswapElf32_Shdr(Elf32_Shdr *shdr32);
+
+int printSecHeaders(FileInfo *fileInfo);
+
+const char *getSecType(Elf64_Word sh_type);
+const char *getSecFlags(Elf64_Xword sh_flags);
+
+int getSecHeadStrTab(FileInfo *fileInfo);
 
 #endif /* H_HEADER_H */
