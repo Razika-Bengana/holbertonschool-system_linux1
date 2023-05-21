@@ -17,13 +17,15 @@ OBJS = $(SRCS:.c=.o)
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Targets
+# Target: 0-hreadelf
 0-hreadelf: 0-hreadelf.o $(OBJS)
 	$(CC) $(CFLAGS) 0-hreadelf.o $(OBJS) -o 0-hreadelf
 
-1-hreadelf: 1-hreadelf.o $(OBJS)
-	$(CC) $(CFLAGS) 1-hreadelf.o $(OBJS) -o 1-hreadelf
+# Target: 1-hreadelf
+1-hreadelf: 1-hreadelf.o display_section_headers.o $(OBJS)
+	$(CC) $(CFLAGS) 1-hreadelf.o display_section_headers.o $(OBJS) -o 1-hreadelf
 
+# Target: 2-hreadelf
 2-hreadelf: 2-hreadelf.o $(OBJS)
 	$(CC) $(CFLAGS) 2-hreadelf.o $(OBJS) -o 2-hreadelf
 
@@ -38,6 +40,10 @@ OBJS = $(SRCS:.c=.o)
 # Rule to compile 2-hreadelf.c
 2-hreadelf.o: 2-hreadelf.c
 	$(CC) $(CFLAGS) -c 2-hreadelf.c -o 2-hreadelf.o
+
+# Rule to compile display_section_headers.c
+display_section_headers.o: display_section_headers.c
+	$(CC) $(CFLAGS) -c display_section_headers.c -o display_section_headers.o
 
 # Rule to clean the build artifacts
 clean:
