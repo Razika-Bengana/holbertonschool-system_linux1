@@ -2,6 +2,10 @@
 
 void display_section_headers(const char *filename)
 {
+	Elf64_Ehdr elf_header;
+	Elf64_Shdr section_header;
+	int i;
+
 	FILE *file = fopen(filename, "rb");
 
 	if (file == NULL)
@@ -9,9 +13,6 @@ void display_section_headers(const char *filename)
 		perror("Error opening file");
 		exit(1);
 	}
-
-	Elf64_Ehdr elf_header;
-	Elf64_Shdr section_header;
 
 	if (fread(&elf_header, sizeof(elf_header), 1, file) != 1)
 	{
@@ -25,8 +26,6 @@ void display_section_headers(const char *filename)
 	       elf_header.e_shnum, elf_header.e_shoff);
 	printf("\nSection Headers:\n");
 	printf("  [Nr] Name              Type            Address          Offset\n");
-
-	int i;
 
 	for (i = 0; i < elf_header.e_shnum; i++)
 	{
