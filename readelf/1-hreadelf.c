@@ -8,16 +8,15 @@
  * @env:  the environment variable
  * Return: 0 (success), -1 (failure)
  */
-int main(int argc, char **argv, char **env)
+int main(int argc, char **argv)
 {
-	char *args[] = {"/usr/bin/readelf", "-W", "-S", "", NULL};
+    if (argc != 2)
+    {
+        fprintf(stderr, "Usage: %s <file>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
 
-	(void)argc;
-	args[3] = argv[1];
-	if (execve("/usr/bin/readelf", args, env) == -1)
-	{
-		perror("execv");
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+    display_section_headers(argv[1]);
+
+    return EXIT_SUCCESS;
 }
