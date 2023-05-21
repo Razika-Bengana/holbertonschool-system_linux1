@@ -8,8 +8,7 @@ CFLAGS = -Wall -Werror -Wextra -pedantic
 SRCS = free_memory.c get_elf_header.c \
         get_elf_type.c get_operating_system_abi.c \
         handle_errors.c header.h init_file_info.c \
-        open_elf_file.c print_elf_header.c get_machine_name.c \
-	display_section_headers.c
+        open_elf_file.c print_elf_header.c get_machine_name.c
 
 # Object files
 OBJS = $(SRCS:.c=.o)
