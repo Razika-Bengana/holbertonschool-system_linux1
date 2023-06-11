@@ -13,15 +13,9 @@
 
 void sigint_handler(int signum)
 {
-	int count = 0;
 
 	printf("Gotcha! [%d]\n", signum);
-
-	/* If SIGINT is received 3 times, exit the program */
-	if (count >= 3)
-	{
-		exit(0);
-	}
+	fflush(stdout);
 }
 
 /**
