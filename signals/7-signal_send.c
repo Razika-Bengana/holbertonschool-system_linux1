@@ -9,15 +9,15 @@
 
 int main(int argc, char *argv[])
 {
+/* Check if the number of arguments is correct */
 	if (argc != 2)
 	{
 		printf("Usage: %s <pid>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
 
-/* Send the SIGINT signal to the specified process using kill */
-/* If the kill operation fails, return EXIT_FAILURE */
-	if (kill(pid, SIGINT) != 0)
+/* Send SIGINT signal to the specified PID */
+	if (kill((pid_t)atoi(argv[1]), SIGINT) != 0)
 		return (EXIT_FAILURE);
 
 	return (EXIT_SUCCESS);
