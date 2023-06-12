@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <signal.h>
+#include "signals.h"
 
 /**
  * sigint_handler - Handler function for the SIGINT signal.
