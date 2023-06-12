@@ -6,6 +6,8 @@
 #include <signal.h>
 #include <stddef.h>
 
+typedef void (*sighandler_t)(int);
+
 int handle_signal(void);
 void sigint_handler(int signum);
 void (*current_handler_signal(void))(int);
