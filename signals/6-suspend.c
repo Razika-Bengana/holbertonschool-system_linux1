@@ -9,6 +9,7 @@ void sigint_handler(int signum)
 {
 	printf("Caught %d\n", signum);
 	printf("Signal received\n");
+	fflush(stdout);
 	_Exit(EXIT_SUCCESS);
 }
 
