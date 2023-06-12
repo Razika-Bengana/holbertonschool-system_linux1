@@ -9,17 +9,17 @@
 
 int main(int argc, char *argv[])
 {
+	/*
+	 * Convert the PID from string to integer using atoi
+	 * and cast it to pid_t type
+	 */
+	pid_t pid = (pid_t)atoi(argv[1]);
+
 	if (argc != 2)
 	{
 		printf("Usage: %s <pid>\n", argv[0]);
 		return (EXIT_FAILURE);
 	}
-
-/*
- * Convert the PID from string to integer using atoi
- * and cast it to pid_t type
- */
-	pid_t pid = (pid_t)atoi(argv[1]);
 
 /* Send the SIGINT signal to the specified process using kill */
 /* If the kill operation fails, return EXIT_FAILURE */
