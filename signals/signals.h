@@ -1,6 +1,11 @@
 #ifndef SIGNALS_H
 #define SIGNALS_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <signal.h>
+#include <stddef.h>
+
 int handle_signal(void);
 void sigint_handler(int signum);
 void (*current_handler_signal(void))(int);
