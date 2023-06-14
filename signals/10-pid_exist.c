@@ -1,4 +1,5 @@
-#include "signals.h"
+#include <sys/types.h>
+#include <signal.h>
 
 /**
  * pid_exist - function that checks if a process exists given its PID.
