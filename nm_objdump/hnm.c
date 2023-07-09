@@ -22,7 +22,7 @@ int processFile(const char *file_name)
 
 	initState(&state);
 	state.exec_name = "hnm";
-	state.f_name = (char*)file_name;
+	state.f_name = (char *)file_name;
 
 	if (openELF(&state) == 0)
 	{
