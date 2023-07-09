@@ -30,7 +30,6 @@ typedef struct nm_state_s
 
 /* hnm.c */
 /* int main(int argc, char **argv) */
-int processFile(const char *file_name);
 
 
 /* hnm_elf_parser.c */
