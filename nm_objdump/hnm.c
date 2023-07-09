@@ -1,4 +1,4 @@
-#include "hnm_header.h"
+#include "hnm.h"
 
 /**
  * processFile - program that processes a single file using the hnm program
