@@ -42,7 +42,7 @@ int main(int argc, char **argv)
 			}
 			else
 			{
-				errorMsg("%s: File format not recognized\n",
+				errorMsg("File format not recognized\n",
 					 NULL, &state);
 				retval = 1;
 			}
