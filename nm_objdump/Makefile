@@ -28,8 +28,8 @@ hnm_print_symbol_tables.o: hnm_print_symbol_tables.c
 
 hnm: hnm.h hnm.o hnm_elf_parser.o hnm_get_file_header.o \
 	hnm_get_section_headers.o hnm_get_symbol_tables.o \
-	hnm_promote_E32Sym_to_E64Sym.o hnm_print_Symbol_tables.o
+	hnm_promote_E32Sym_to_E64Sym.o hnm_print_symbol_tables.o
 	$(CC) $(CFLAGS) hnm.o hnm_elf_parser.o hnm_get_file_header.o \
 	hnm_get_section_headers.o hnm_get_symbol_tables.o \
-	hnm_promote_E32Sym_to_E64Sym.o hnm_print_Symbol_tables.o \
+	hnm_promote_E32Sym_to_E64Sym.o hnm_print_symbol_tables.o \
 	-o hnm
