@@ -1,4 +1,4 @@
-#include "hnm_header.h"
+#include "hnm.h"
 
 /**
  * getFileHeader - program that reads the ELF file header

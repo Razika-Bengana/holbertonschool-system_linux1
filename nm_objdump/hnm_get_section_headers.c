@@ -1,4 +1,4 @@
-#include "hnm.h"
+include "hnm.h"
 
 /**
  * getSectionHeaders - program that reads ELF section headers and stores them
