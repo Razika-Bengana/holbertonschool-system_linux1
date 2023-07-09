@@ -25,7 +25,6 @@ int main(int argc, char **argv)
 	for (i = 0, retval = 0; i < ac; i++)
 	{
 		initState(&state);
-		state.exec_name = argv[0];
 		state.f_name = args[i];
 /* Open the ELF file */
 		if (openELF(&state) == 0)
@@ -42,7 +41,7 @@ int main(int argc, char **argv)
 			}
 			else
 			{
-				errorMsg("File format not recognized\n",
+				errorMsg("%s: File format not recognized\n",
 					 NULL, &state);
 				retval = 1;
 			}
