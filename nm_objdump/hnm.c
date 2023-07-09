@@ -33,9 +33,6 @@ int main(int argc, char **argv)
 /* Retrieve the file header */
 			if (getFileHeader(&state) == 0)
 			{
-/* Print the file name if there are multiple files */
-				if (ac > 1)
-					printf("\n%s:\n", state.f_name);
 /* Retrieve and print section headers, symbol tables, and symbols */
 				if (!(getSectionHeaders(&state) == 0 &&
 				      getSymTables(&state) == 0 &&
