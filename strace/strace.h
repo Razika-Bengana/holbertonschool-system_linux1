@@ -13,6 +13,7 @@
 #include <sys/reg.h>
 #include <string.h>
 
+/* task 1 + task 2 */
 int traceProcess(char *args[], char *env[]);
 int waitSyscall(pid_t child);
 
