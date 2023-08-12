@@ -13,9 +13,8 @@
 #include <sys/reg.h>
 #include <string.h>
 
-int startSubprocess(char *args[], char *env[]);
-int waitForSyscall(pid_t child);
-int traceChild(pid_t child);
+int traceProcess(char *args[], char *env[]);
+int waitSyscall(pid_t child);
 
 
 #endif /* STRACE_H */
