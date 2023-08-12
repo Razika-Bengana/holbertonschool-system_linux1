@@ -19,5 +19,13 @@ strace_1: syscalls.h 1_strace.o
 	$(CC) $(CFLAGS) syscalls.h 1_strace.o -o strace_1
 
 
+# task 2
+2_strace.o: 2_strace.c
+	$(CC) -c $(CFLAGS) 2_strace.c
+
+strace_2: syscalls.h 2_strace.o
+	$(CC) $(CFLAGS) syscalls.h 2_strace.o -o strace_2
+
+
 clean:
 	rm -f strace_0
