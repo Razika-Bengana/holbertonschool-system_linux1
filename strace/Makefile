@@ -1,7 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Werror -Wextra -pedantic
 
-all: strace_0
 
 # task 0
 0_strace.o: 0_strace.c
@@ -25,6 +24,14 @@ strace_1: syscalls.h 1_strace.o
 
 strace_2: syscalls.h 2_strace.o
 	$(CC) $(CFLAGS) syscalls.h 2_strace.o -o strace_2
+
+
+# task 3
+3_strace.o: 3_strace.c
+	$(CC) -c $(CFLAGS) 3_strace.c
+
+strace_3: syscalls.h 3_strace.o
+	$(CC) $(CFLAGS) syscalls.h 3_strace.o -o strace_3
 
 
 clean:
