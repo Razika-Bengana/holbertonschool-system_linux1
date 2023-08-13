@@ -17,5 +17,11 @@
 int traceProcess(char *args[], char *env[]);
 int waitSyscall(pid_t child);
 
+/* task 3 */
+int waitSyscall(pid_t child);
+void printReg(struct user_regs_struct regs, int idx, ulong reg, char *delim);
+void printArgs(struct user_regs_struct regs);
+int trace(pid_t child);
+
 
 #endif /* STRACE_H */
