@@ -12,7 +12,7 @@ int traceSyscalls(pid_t childPid)
 {
 	int status, isSyscallEntry;
 
-	isSyscallEntry = 1;
+	isSyscallEntry = 0;
 
 	while (1)
 	{
